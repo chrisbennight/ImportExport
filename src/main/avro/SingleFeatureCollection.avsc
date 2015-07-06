@@ -1,0 +1,58 @@
+[
+    {
+        "name" : "AttributeValues",
+        "namespace" : "com.bennight.geowave.types.generated",
+        "type" : "record",
+        "fields" : [
+            {"name" : "fid",
+                "type" : "string"
+            },
+            {"name" : "values",
+                "type" : {
+                    "type" : "array",
+                    "items" : "bytes"
+                }
+            },
+            {"name" : "classifications",
+                "type" : [
+                    "null",{
+                        "type" : "array",
+                        "items" : "string"
+                    }
+                ]
+            }
+         ]
+    },
+    {
+        "name" : "SingleFeatureCollection",
+        "namespace" : "com.bennight.geowave.types.generated",
+        "type" : "record",
+        "fields" : [
+            {"name" : "FeatureTypeName", "type" : "string"},
+            {"name" : "Attributes",
+                "type" : {
+                    "type" : "array",
+                    "items" : "string"
+                }
+            },
+            {"name" : "AttributeTypes",
+                "type" : {
+                    "type" : "array",
+                    "items" : "string"
+                }
+            },
+            {"name" : "AttributeDefaultClassifications",
+                "type" : {
+                    "type" : "array",
+                    "items" : "string"
+                }
+            },
+            {"name" : "Values",
+                "type" : {
+                    "type" : "array",
+                    "items" : "AttributeValues"
+                }
+            }
+        ]
+    }
+]
