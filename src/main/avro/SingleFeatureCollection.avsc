@@ -24,29 +24,37 @@
          ]
     },
     {
+        "name" : "FeatureDefinition",
+        "namespace" : "com.bennight.geowave.types.generated",
+        "type" : "record",
+        "fields" : [
+           {"name" : "FeatureTypeName", "type" : "string"},
+             {"name" : "AttributeNames",
+                 "type" : {
+                     "type" : "array",
+                     "items" : "string"
+                 }
+             },
+             {"name" : "AttributeTypes",
+                 "type" : {
+                     "type" : "array",
+                     "items" : "string"
+                 }
+             },
+             {"name" : "AttributeDefaultClassifications",
+                 "type" : {
+                     "type" : "array",
+                     "items" : "string"
+                 }
+             }
+         ]
+    },
+    {
         "name" : "SingleFeatureCollection",
         "namespace" : "com.bennight.geowave.types.generated",
         "type" : "record",
         "fields" : [
-            {"name" : "FeatureTypeName", "type" : "string"},
-            {"name" : "Attributes",
-                "type" : {
-                    "type" : "array",
-                    "items" : "string"
-                }
-            },
-            {"name" : "AttributeTypes",
-                "type" : {
-                    "type" : "array",
-                    "items" : "string"
-                }
-            },
-            {"name" : "AttributeDefaultClassifications",
-                "type" : {
-                    "type" : "array",
-                    "items" : "string"
-                }
-            },
+            {"name" : "FeatureType", "type" : "FeatureDefinition"},
             {"name" : "Values",
                 "type" : {
                     "type" : "array",
@@ -54,5 +62,28 @@
                 }
             }
         ]
+    },
+    {
+        "name" : "ExportMetadata",
+        "namespace" : "com.bennight.geowave.types.generated",
+        "type" : "record",
+        "fields" : [
+            {"name" : "IndexId", "type" : "bytes"},
+            {"name" : "ConfiguredStatistics", "type" : {
+                    "type" : "array",
+                    "items" : "string"
+                }
+            }
+        ]
+    },
+    {
+        "name" : "ExportSingleFeatureCollection",
+        "namespace" : "com.bennight.geowave.types.generated",
+        "type" : "record",
+        "fields" : [
+            {"name" : "ExportInfo", "type" : "ExportMetadata"},
+            {"name" : "FeatureCollection", "type" : "SingleFeatureCollection"}
+        ]
     }
+
 ]
