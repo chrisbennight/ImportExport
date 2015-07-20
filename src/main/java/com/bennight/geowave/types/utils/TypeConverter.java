@@ -1,6 +1,7 @@
 package com.bennight.geowave.types.utils;
 
 import com.bennight.geowave.types.generated.AttributeValues;
+import com.bennight.geowave.types.generated.FeatureDefinition;
 import com.bennight.geowave.types.generated.SingleFeatureCollection;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.io.WKBWriter;
@@ -71,8 +72,12 @@ public class TypeConverter {
             avroObjectToReuse = new SingleFeatureCollection();
         }
 
-        avroObjectToReuse.setFeatureTypeName(sft.getTypeName());
-
+        FeatureDefinition fd = avroObjectToReuse.getFeatureType();
+        if (fd == null) {
+        	fd = new FeatureDefinition();
+        }
+        fd.setFeatureTypeName(sft.getTypeName());
+        
         List<String> attributes = new ArrayList<>(sft.getAttributeCount());
         List<String> types = new ArrayList<>(sft.getAttributeCount());
         List<String> classifications = new ArrayList<>(sft.getAttributeCount());
@@ -93,9 +98,11 @@ public class TypeConverter {
             classification = null;
         }
 
-        avroObjectToReuse.setAttributes(attributes);
-        avroObjectToReuse.setAttributeTypes(types);
-        avroObjectToReuse.setAttributeDefaultClassifications(classifications);
+        
+        fd.setAttributeNames(attributes);
+        fd.setAttributeTypes(types);
+        fd.setAttributeDefaultClassifications(classifications);
+        avroObjectToReuse.setFeatureType(fd);
 
         List<AttributeValues> attributeValues = new ArrayList<>(features.size());
 
