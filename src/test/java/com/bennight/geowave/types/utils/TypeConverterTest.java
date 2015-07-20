@@ -68,8 +68,11 @@ public class TypeConverterTest {
     public void testSerializeDeserializeSingleFeatureCollection() throws Exception {
 
         byte[] serializedForm = tc.serializeSingleFeatureCollection(features, null, null, "");
-        System.out.println(serializedForm.length);
-
+        List<SimpleFeature> features2 = tc.deserializeSingleFeatureCollection(serializedForm);
+        
+        for (int i = 0; i < features.size(); i++){
+        	assertEquals(features.get(i), features2.get(i));
+        }
     }
 
 }
